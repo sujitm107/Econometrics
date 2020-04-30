@@ -1,3 +1,6 @@
+#Sujit Molleti
+#Econ 322 Homework 1
+
 data<-read.csv('birthweight.csv', head=T, sep=",") 
 #summary(data)
 data2 <- data[data$smoke!=9,]
@@ -15,10 +18,12 @@ smokerSE
 non_smokerSE <- sd(data2$bwt[data2$smoke==1])/sqrt(length(which(data2$smoke==1)))
 non_smokerSE
 
+#confidence interval for smoking mothers
 smokerMean + 1.96*smokerSE
 smokerMean - 1.96*smokerSE
 #(112.3026, 115.0686)
 
+#confidence interval for non-smoking mothers
 non_smokerMean + 1.96*non_smokerSE
 non_smokerMean - 1.96*non_smokerSE
 #(121.4745, 125.0951)

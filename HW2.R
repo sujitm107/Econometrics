@@ -24,7 +24,7 @@ library(zoo)
 library(lmtest)
 library(sandwich)
 
-# redo the second regression but with heteroskedasticty robust standard errors
+# redo the first regression but with heteroskedasticty robust standard errors
 coeftest(reg, vcov=vcovHC(reg))
 summary(reg)
 
@@ -54,7 +54,7 @@ coeftest(reg3e, vcov=vcovHC(reg3e))
 # load built-in data mtcars
 
 #run a regression of mpg on wt (weight), hp (horsepower), and cyl (# cylinders)
-model<-lm(weight ~ agesq + sex.f + middleincome + highincome + married + height + educ + race, data=data)
+model<-lm(weight ~ age + agesq + sex.f + middleincome + highincome + married + height + educ.c + race.c, data=data)
 
 #model<-lm(mpg~wt+hp+cyl, data=mtcars)
 
@@ -63,9 +63,10 @@ model<-lm(weight ~ agesq + sex.f + middleincome + highincome + married + height 
 #install.packages("car")
 library(car)
 
-# test joint hypothesis that coef on weight AND coef on cyl both =0
-linearHypothesis(model, c("middleincome=0", "highincome=0"))
+#Joint Hypothesis Tests
+linearHypothesis(model, c("race.c2=0", "race.c3=0", "race.c4=0", "race.c5=0"))
+linearHypothesis(model, c("educ.c2=0", "educ.c3=0", "educ.c4=0", "educ.c5=0", "educ.c6=0"))
 
 # test joint hypothesis that coef on hp = coef on wt
-linearHypothesis(model,c("middleincome=highincome"))
+#linearHypothesis(model,c("middleincome=highincome"))
 
